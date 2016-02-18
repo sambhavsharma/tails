@@ -36,4 +36,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Twitter Configuration
+  config.consumer_key = 'xxxx'
+  config.consumer_secret = 'xxxx'
+  config.access_token = 'xxxx'
+  config.access_token_secret = 'xxxx'
 end
