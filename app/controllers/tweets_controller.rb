@@ -13,14 +13,6 @@ class TweetsController < ApplicationController
         end
     end
 
-    def get_tweets
-        if params[:username].present?
-            username = params[:username]
-            options = {:count => 20}
-            @tweets = $twitter.user_timeline(username,options)
-        end
-    end
-
     def save_tweets
         if params[:tweets].present?
             tweets = params[:tweets]
@@ -28,6 +20,7 @@ class TweetsController < ApplicationController
                 print tweet
             end
         end
+        render :template => "tweets/index", :locals => {:@message => "Tweets Saved!"}
     end
 
 end

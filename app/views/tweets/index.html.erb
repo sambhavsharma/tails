@@ -9,7 +9,11 @@
 
 <% end %>
 
-
+<% unless @message.nil? %>
+    <div style="margin: 20px;">
+        <h3><%= @message %></h3>
+    </div>
+<% end %>
 
 
 <% unless @tweets.nil? || @tweets.empty? %>
