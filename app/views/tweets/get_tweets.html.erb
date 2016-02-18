@@ -10,7 +10,7 @@
   <% unless @tweets.nil? || @tweets.empty? %>
       <div style="margin-top: 20px;">
         <% @tweets.each do |tweet| %>
-          <li><%= tweet.text %></li>
+          <li><%= tweet %></li>
         <% end %>
       </div>
   <% end %>

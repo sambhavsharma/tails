@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/tweets/get_tweets' => 'tweets#get_tweets'
   post '/tweets/get_tweets' => 'tweets#get_tweets'
   post '/tweets' => 'tweets#index'
+  post '/tweets/save_tweets' => 'tweets#save_tweets'
 
   resources :tweets
 
