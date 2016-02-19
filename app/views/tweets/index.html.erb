@@ -2,9 +2,9 @@
     <div class="col-md-3">
     </div>
     <div class="col-sm-6 col-md-6">
-        <%= form_tag '/tweets' do |f| %>
+        <%= form_tag '/tweets', :id => 'fetch_tweets_form' do |f| %>
             <div class="input-group">
-                <%=text_field_tag 'username', nil, {placeholder: 'Search Tweets by Username', class: 'form-control'}%>
+                <%=text_field_tag 'username', nil, {placeholder: 'Search Tweets by Username', class: 'form-control', id: 'username'}%>
                 <!-- <input type="text" class="form-control" placeholder="Search Tweets by Username" 
                     name="srch-term" id="srch-term"> -->
                 <div class="input-group-btn">
@@ -33,7 +33,7 @@
             <div class="row">
 
                 <div class="col-md-12">
-                    <%= form_tag '/tweets/save_tweets' do |f| %>
+                    <%= form_tag '/tweets/save_tweets', :id => 'save_tweets_form' do |f| %>
                         <div style="margin-bottom: 10px;">
                             <%= button_tag(type: "submit", class: "btn btn-default") do %>
                                 Save Selected Tweets <i class="glyphicon glyphicon-floppy-saved"></i>
@@ -77,11 +77,20 @@
 <% end %>
 
 <script type="text/javascript">
-      function selectAll(){
+    function selectAll(){
         $("input:checkbox").each(function(){
           $(this).attr('checked', true);
         });
 
         return false;
-      }
+    }
+
+    $('#save_tweets_form').on('submit', function (e) {
+        if ($("input[type=checkbox]:checked").length === 0) {
+            e.preventDefault();
+            alert('No tweets were selected!');
+            return false;
+        }
+    });
+
 </script>

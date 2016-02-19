@@ -7,3 +7,8 @@ Small Rails Projects that allows a user/developer to store tweets of a user in d
 
 -- To run in development mode:
   * Copy config/environments/test.rb to config/environments/development.rb and add respective configurations
+
+-- Steps:
+    * Install Dependencies: bundle install
+    * Run Rails App: bin/rails s
+    * Open http://localhost:3000/tweets
