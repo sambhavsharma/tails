@@ -1,32 +1,87 @@
-<h1>Tweets!</h1>
-
-<%= form_tag '/tweets' do |f| %>
-
-    <%=label_tag 'username' %>
-    <%=text_field_tag 'username'%>
- 
-    <div><%= submit_tag 'Fetch Tweets' %></div>
-
-<% end %>
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <%= form_tag '/tweets' do |f| %>
+            <div class="input-group">
+                <%=text_field_tag 'username', nil, {placeholder: 'Search Tweets by Username', class: 'form-control'}%>
+                <!-- <input type="text" class="form-control" placeholder="Search Tweets by Username" 
+                    name="srch-term" id="srch-term"> -->
+                <div class="input-group-btn">
+                    <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                        <i class="glyphicon glyphicon-search"></i>
+                    <% end %> 
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
 
 <% unless @message.nil? %>
-    <div style="margin: 20px;">
-        <h3><%= @message %></h3>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" style="margin: 20px;">
+            <h4><%= @message %></h4>
+        </div>
     </div>
 <% end %>
 
-
 <% unless @tweets.nil? || @tweets.empty? %>
-    <%= form_tag '/tweets/save_tweets' do |f| %>    
-        <div style="margin-top: 20px;">
-            <% @tweets.each do |tweet| %>
-                <p>
-                    <input type="checkbox" name="tweets[]" 
-                        value="<%= tweet.id %>&&<%= tweet.user.username %>&&<%= tweet.text %>" />
-                    <%= tweet.text %>
-                </p>
-            <% end %>
+
+    <div class="panel panel-default" style="margin-top: 20px;">
+        <div class="panel-body">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <%= form_tag '/tweets/save_tweets' do |f| %>
+                        <div style="margin-bottom: 10px;">
+                            <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                                Save Selected Tweets <i class="glyphicon glyphicon-floppy-saved"></i>
+                            <% end %>
+                        </div>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="all" onclick="selectAll()" />
+                                    </th>
+                                    <th>Tweet Content</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <% @tweets.each do |tweet| %>
+                                <tr>
+                                    <th scope="row">
+                                        <input type="checkbox" name="tweets[]" 
+                                            value="<%= tweet.id %>&&<%= tweet.user.username %>&&<%= tweet.text %>" />
+                                    </th>
+                                    <td><%= tweet.text %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+
+                        <div>
+                            <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                                Save Selected Tweets <i class="glyphicon glyphicon-floppy-saved"></i>
+                            <% end %>
+                        </div>
+                        
+                    <% end %>
+                </div>
+            </div>
         </div>
-        <div><%= submit_tag 'Save Selected Tweets' %></div>
-    <% end %>
+    </div>
 <% end %>
+
+<script type="text/javascript">
+      function selectAll(){
+        $("input:checkbox").each(function(){
+          $(this).attr('checked', true);
+        });
+
+        return false;
+      }
+</script>
